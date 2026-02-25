@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "@primeuix/themes": "^2.0.3",
     "@tailwindcss/vite": "^4.2.1",
     "md-editor-v3": "^6.3.1",

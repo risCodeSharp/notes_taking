@@ -19,6 +19,7 @@ import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
 import TabPanels from 'primevue/tabpanels';
 import "@/assets/main.css"; // Tailwind base imported
+import Button  from "primevue/button";
 
 const app = createApp(App);
 
@@ -28,13 +29,13 @@ app.use(PrimeVue, {
     preset: Aura,
     options: {
       darkModeSelector: ".my-app-dark",
-      cssLayer: true,      // IMPORTANT for Tailwind + PrimeVue
+      cssLayer: true,
     },
-      ripple: true, // enable ripple globally if you want
-  inputStyle: 'outlined', // optional
-  locale: {} // optional
+      ripple: true,
+      inputStyle: 'outlined',
+      locale: {}
   },
-});
+});;
 
 
 app.component('Tabs', Tabs);
@@ -48,6 +49,7 @@ app.component("Drawer", Drawer);
 app.component("InputText", InputText);
 app.component("Avatar", Avatar);
 app.component("Badge", Badge);
+app.component("Button", Button);
 app.component("Editor", Editor);
 
 app.component("TabView", TabView);
