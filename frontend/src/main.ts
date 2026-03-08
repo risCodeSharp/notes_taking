@@ -68,7 +68,6 @@ app.component('SplitterPanel', SplitterPanel);
 app.component("Editor", Editor);
 
 app.component("TabView", TabView);
-app.component("TabPanel", TabPanel);
 
 app.use(router);
 app.mount("#app");
