@@ -1,6 +1,6 @@
 use crate::{
     auth::make_token,
-    models::{AuthResponse, AuthUser, LoginPayload, UserPublic},
+    models::auth::{AuthResponse, AuthUser, LoginPayload, UserPublic},
     repo::user_repo::UserRepository,
     routes::AppState,
 };
@@ -10,7 +10,7 @@ use axum::{
 };
 use bcrypt::{DEFAULT_COST, hash};
 
-use crate::models::{CreateUserPayload, UserResponse};
+use crate::models::auth::{CreateUserPayload, UserResponse};
 use crate::response::ApiResponse;
 
 pub async fn create_user(

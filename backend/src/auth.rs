@@ -5,7 +5,7 @@ use axum::{
 };
 use chrono::{Duration, Utc};
 use jsonwebtoken::{DecodingKey, EncodingKey, Header, Validation, decode, encode, errors::ErrorKind};
-use crate::{models::{AuthUser, Claims}, response::ApiResponse, routes::AppState};
+use crate::{models::auth::{AuthUser, Claims}, response::ApiResponse, routes::AppState};
 
 // i have set token time to 2 hours
 pub fn make_token(id: &i32, email: &str, secret: &str) -> Result<String, jsonwebtoken::errors::Error> {

@@ -11,7 +11,7 @@ CREATE TABLE users (
 CREATE TABLE notebooks (
     id SERIAL PRIMARY KEY,
     owner_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    name TEXT NOT NULL UNIQUE ,
+    name TEXT NOT NULL ,
     created_at TIMESTAMP DEFAULT NOW()
 );
 
@@ -20,7 +20,7 @@ CREATE TABLE notes (
     id SERIAL PRIMARY KEY,
     notebook_id INT NOT NULL REFERENCES notebooks(id) ON DELETE CASCADE,
     owner_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    title TEXT UNIQUE,
+    title TEXT NOT NULL,
     content TEXT NOT NULL DEFAULT '',
     visibility TEXT DEFAULT 'private',
     last_editor_id INT REFERENCES users(id),

@@ -1,5 +1,5 @@
 use sqlx::PgPool;
-use crate::models::{CreateUserPayload, UserResponse};
+use crate::models::auth::{CreateUserPayload, UserResponse};
 
 pub struct UserRepository;
 
