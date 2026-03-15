@@ -54,12 +54,14 @@ pub async fn routes_init() -> Router {
 async fn init_app_state() -> AppState {
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let jwt_secret = env::var("JWT_SECRET").unwrap_or_else(|_| {"super-secret_key".to_string()});
-
+    
+    println!("Connecting to database...");
     let pool: Pool<Postgres> = PgPoolOptions::new()
     .max_connections(10)
     .connect(&database_url)
     .await
     .expect("Failed to connect to database");
+
 
     // Runs migrations
     sqlx::migrate!("./migrations")

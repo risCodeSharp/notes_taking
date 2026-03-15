@@ -11,9 +11,10 @@ mod auth;
 
 #[tokio::main]
 async fn main() {
-    
+    println!("Backend Running!!");
     // load environment variables from the '.env' file.
-    dotenvy::dotenv().expect("Failed to load environment variable");
+    let _ = dotenvy::dotenv(); // ignores missing .env
+
 
     let routes = routes::routes_init().await;
 
