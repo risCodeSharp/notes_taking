@@ -24,7 +24,7 @@ pub async fn create_user(
     let password_hash = hash(&payload.password, DEFAULT_COST).unwrap();
     match UserRepository::create(&state.pool, payload, &password_hash).await {
         Ok(user_response) => {
-            ApiResponse::<UserResponse>::SucessWithData("User created!".to_string(), user_response)
+            ApiResponse::<UserResponse>::SuccessWithData("User created!".to_string(), user_response)
         }
         Err(e) => {
             ApiResponse::<UserResponse>::Failed(format!("Failed to create a user, error = {e}"))
@@ -60,7 +60,7 @@ pub async fn login_user(
     match make_token(&id, &email, &state.jwt_secret) {
         Ok(token) => {
             let user = UserPublic { id, email };
-            ApiResponse::SucessWithData("Login successful".into(), AuthResponse { token, user })
+            ApiResponse::SuccessWithData("Login successful".into(), AuthResponse { token, user })
         }
         Err(_) => ApiResponse::InternalServerError("Failed to create token".into()),
     }
@@ -71,7 +71,7 @@ pub async fn me(
     Extension(auth_user): Extension<AuthUser>,
 ) -> ApiResponse<UserPublic> {
     match UserRepository::get_user(&state.pool, &auth_user.email).await {
-        Ok(_response) => ApiResponse::SucessWithData(
+        Ok(_response) => ApiResponse::SuccessWithData(
             "ok".into(),
             UserPublic {
                 id: auth_user.id,

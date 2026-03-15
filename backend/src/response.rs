@@ -9,7 +9,7 @@ use serde_json::json;
 #[derive(Serialize)]
 pub enum ApiResponse<T: Serialize> {
     Success(String),
-    SucessWithData(String, T),
+    SuccessWithData(String, T),
     Failed(String),
     Unauthorized(Option<String>),
     InternalServerError(String),
@@ -31,9 +31,9 @@ impl<T: Serialize> IntoResponse for ApiResponse<T> {
                     .body(Body::from(json.to_string()))
                     .unwrap_or_default()
             }
-            Self::SucessWithData(msg, new_user) => {
+            Self::SuccessWithData(msg, new_user) => {
                 let json = json!({
-                    "sucess": true,
+                    "success": true,
                     "data": new_user,
                     "message": msg 
                 });
@@ -45,7 +45,7 @@ impl<T: Serialize> IntoResponse for ApiResponse<T> {
             }
             Self::Failed(msg) => {
                 let json = json!({
-                    "sucess": false,
+                    "success": false,
                     "data": {
                         "message": msg
                     }
@@ -58,7 +58,7 @@ impl<T: Serialize> IntoResponse for ApiResponse<T> {
             }
             Self::Unauthorized(msg) => {
                 let json = json!({
-                    "sucess": false,
+                    "success": false,
                     "data": {
                         "message": match msg { Some(v) => v, None => "Wrong password!".to_string()}
                     }
@@ -71,7 +71,7 @@ impl<T: Serialize> IntoResponse for ApiResponse<T> {
             }
             Self::InternalServerError(msg) => {
                 let json = json!({
-                    "sucess": false,
+                    "success": false,
                     "data": {
                         "message": msg
                     }

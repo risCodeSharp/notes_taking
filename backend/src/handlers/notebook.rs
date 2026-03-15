@@ -16,7 +16,7 @@ pub async fn create(
     Json(payload): Json<NotebookPayload>,
 ) -> ApiResponse<NotebookResponse> {
     match NotebookRepository::create(&state.pool, &payload, auth_user.id).await {
-        Ok(response) => ApiResponse::SucessWithData("Notebook created".to_string(), response),
+        Ok(response) => ApiResponse::SuccessWithData("Notebook created".to_string(), response),
         Err(e) => ApiResponse::Failed(format!("Failed to create Notebook, [DatabaseError] = {e}")),
     }
 }
@@ -28,7 +28,7 @@ pub async fn update (
     Json(payload): Json<NotebookPayload>,
 ) -> ApiResponse<NotebookResponse> {
     match NotebookRepository::update(&state.pool, &payload, auth_user.id, notebook_id).await {
-        Ok(response) => ApiResponse::SucessWithData("Notebook updated".to_string(), response),
+        Ok(response) => ApiResponse::SuccessWithData("Notebook updated".to_string(), response),
         Err(e) => ApiResponse::Failed(format!("Failed to update Notebook, [DatabaseError] = {e}")),
     }
 }
@@ -39,7 +39,7 @@ pub async fn delete (
     Path(notebook_id): Path<i32>,
 ) -> ApiResponse<NotebookResponse> {
     match NotebookRepository::delete(&state.pool, auth_user.id, notebook_id).await {
-        Ok(response) => ApiResponse::SucessWithData("Notebook deleted".to_string(), response),
+        Ok(response) => ApiResponse::SuccessWithData("Notebook deleted".to_string(), response),
         Err(e) => ApiResponse::Failed(format!("Failed to delete notebook, [DatabaseError] = {e}")),
     }
 }
@@ -49,7 +49,7 @@ pub async fn list(
     Extension(auth_user): Extension<AuthUser>,
 ) -> ApiResponse<Vec<NotebookResponse>> {
     match NotebookRepository::get_notebooks(&state.pool, auth_user.id).await {
-        Ok(response) => ApiResponse::SucessWithData("All Notebook are Fetched!".to_string(), response),
+        Ok(response) => ApiResponse::SuccessWithData("All Notebook are Fetched!".to_string(), response),
         Err(e) => ApiResponse::Failed(format!("Failed to fetch all notebook, [DatabaseError] = {e}")),
     }
 }
@@ -60,7 +60,7 @@ pub async fn get_notebook(
     Path(notebook_id): Path<i32>
 ) -> ApiResponse<NotebookResponse> {
     match NotebookRepository::get_notebook(&state.pool, auth_user.id, notebook_id).await {
-        Ok(response) => ApiResponse::SucessWithData("Notebook is Fetched!".to_string(), response),
+        Ok(response) => ApiResponse::SuccessWithData("Notebook is Fetched!".to_string(), response),
         Err(e) => ApiResponse::Failed(format!("Failed to fetch a notebook, [DatabaseError] = {e}")),
     }
 }
