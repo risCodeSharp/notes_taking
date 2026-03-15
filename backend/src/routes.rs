@@ -57,6 +57,7 @@ pub async fn routes_init() -> Router {
     Router::<AppState>::new()
     .nest("/api", public)
     .nest("/api", protected)
+    .route("/health", get(|| async {"Ok"}) )
     .with_state(state)
     .layer(cors)
 }
