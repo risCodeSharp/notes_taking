@@ -32,7 +32,7 @@ pub struct CreateNotePayload {
 pub struct UpdateNotePayload {
     pub title: Option<String>,
     pub content: Option<String>,
-    pub visibilty: Option<String>,
+    pub visibility: Option<String>,
     pub notebook_id: Option<i32>,
 }
 

@@ -56,7 +56,7 @@ impl NoteRepository {
         )
         .bind(&payload.title)
         .bind(&payload.content)
-        .bind(&payload.visibilty)
+        .bind(&payload.visibility)
         .bind(&user_id)
         .bind(&payload.notebook_id)
         .bind(&note_id)
