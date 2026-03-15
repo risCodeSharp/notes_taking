@@ -2,7 +2,7 @@ use axum::{Router, middleware};
 use axum::routing::{delete, get, post, put};
 use std::env;
 use sqlx::{Pool, Postgres, postgres::PgPoolOptions};
-
+use tower_http::cors::{CorsLayer, Any};
 use crate::{auth, handlers};
 
 #[derive(Clone)]
@@ -39,7 +39,17 @@ fn protected_routes(state: &AppState) -> Router<AppState> {
 }
 
 pub async fn routes_init() -> Router {
+    
+    /*
+     let allowed_origins = ["http://localhost:4000".parse().unwrap()];
 
+    let cors = CorsLayer::new()
+        .allow_origin(allowed_origins) // Allow only localhost:4000
+        .allow_methods(vec![Method::GET, Method::POST]);
+
+     */
+
+    let cors = CorsLayer::new().allow_origin(Any);
     let state = init_app_state().await;
     let public = public_routes();
     let protected = protected_routes(&state);
@@ -48,6 +58,7 @@ pub async fn routes_init() -> Router {
     .nest("/api", public)
     .nest("/api", protected)
     .with_state(state)
+    .layer(cors)
 }
 
 
