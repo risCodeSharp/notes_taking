@@ -26,6 +26,7 @@ fn protected_routes(state: &AppState) -> Router<AppState> {
         .route("/users/me", put(handlers::user::update))
         .route("/users/me/password", put(handlers::user::update_password))
         .route("/users/me", delete(handlers::user::delete))
+        
         // .route
         // notebooks routes
         .route("/notebooks", post(handlers::notebook::create))

@@ -98,7 +98,6 @@ impl UserRepository {
         user_id: i32,
     ) -> Result<UserResponse, sqlx::Error> {
 
-
         sqlx::query_as::<_, UserResponse>(
             "UPDATE users SET password_hash = $1 WHERE id = $2 RETURNING id, name, email",
         )

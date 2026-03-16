@@ -10,7 +10,12 @@ export interface ApiResponse<T> {
   message: string
   data: T
 }
-
+export interface FileNode {
+  id: string
+  name: string
+  type: 'file' | 'folder'
+  children?: FileNode[]
+}
 // ── Auth ──────────────────────────────────────────────────────
 export interface CreateUserPayload {
   name: string
