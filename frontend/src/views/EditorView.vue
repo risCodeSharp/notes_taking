@@ -116,7 +116,7 @@ function onKeydown(e: KeyboardEvent) {
     >
       <!-- Sidebar Panel -->
       <SplitterPanel
-        :size="18"
+        :size="35"
         :minSize="12"
         class="hidden md:flex flex-col overflow-hidden"
       >
