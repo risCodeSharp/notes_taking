@@ -13,13 +13,20 @@ pub struct AppState {
 
 fn public_routes() -> Router<AppState> {
     return Router::new()
-        .route("/users/register", post(handlers::users::create_user))
-        .route("/users/login", post(handlers::users::login_user));
+        .route("/users/register", post(handlers::auth::create_user))
+        .route("/users/login", post(handlers::auth::login_user));
 }
 
 fn protected_routes(state: &AppState) -> Router<AppState> {
     return Router::new()
-        .route("/users/me", get(handlers::users::me))
+        // auth routes
+        .route("/users/me", get(handlers::auth::me))
+
+        // user routes 
+        .route("/users/me", put(handlers::user::update))
+        .route("/users/me/password", put(handlers::user::update_password))
+        .route("/users/me", delete(handlers::user::delete))
+        // .route
         // notebooks routes
         .route("/notebooks", post(handlers::notebook::create))
         .route("/notebooks", get(handlers::notebook::list))

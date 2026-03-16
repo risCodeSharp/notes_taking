@@ -8,12 +8,26 @@ pub struct CreateUserPayload {
     pub password: String,
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct UpdateUserPayload {
+    pub email: Option<String>,
+    pub password: Option<String>,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct UpdatePasswordPayload {
+    pub old_password: String,
+    pub new_password: String,
+}
 
 #[derive(Serialize, Deserialize)]
 pub struct LoginPayload {
     pub email: String,
     pub password: String,
-}
+}    
+
+
+
 
 #[derive(Serialize, Deserialize, FromRow)]
 pub struct UserResponse {

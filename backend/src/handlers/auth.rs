@@ -8,7 +8,6 @@ use axum::{
     Extension, Json,
     extract::State,
 };
-use bcrypt::{DEFAULT_COST, hash};
 
 use crate::models::auth::{CreateUserPayload, UserResponse};
 use crate::response::ApiResponse;
@@ -21,8 +20,8 @@ pub async fn create_user(
         return ApiResponse::<UserResponse>::Failed("User already exists!".to_string());
     }
 
-    let password_hash = hash(&payload.password, DEFAULT_COST).unwrap();
-    match UserRepository::create(&state.pool, payload, &password_hash).await {
+
+    match UserRepository::create(&state.pool, payload).await {
         Ok(user_response) => {
             ApiResponse::<UserResponse>::SuccessWithData("User created!".to_string(), user_response)
         }
@@ -40,7 +39,7 @@ pub async fn login_user(
         return ApiResponse::<AuthResponse>::Failed("No Account found".to_string());
     }
 
-    let (id, email, password_hash) = match UserRepository::get_user(&state.pool, &payload.email)
+    let (id, email, password_hash) = match UserRepository::get_user_by_email(&state.pool, &payload.email)
         .await
     {
         Ok(v) => v,
@@ -70,7 +69,7 @@ pub async fn me(
     State(state): State<AppState>,
     Extension(auth_user): Extension<AuthUser>,
 ) -> ApiResponse<UserPublic> {
-    match UserRepository::get_user(&state.pool, &auth_user.email).await {
+    match UserRepository::get_user(&state.pool, auth_user.id).await {
         Ok(_response) => ApiResponse::SuccessWithData(
             "ok".into(),
             UserPublic {
@@ -81,7 +80,3 @@ pub async fn me(
         Err(_) => ApiResponse::Failed("User not found".into()),
     }
 }
-
-// pub async fn login_user(Json(payload)) {
-
-// }
