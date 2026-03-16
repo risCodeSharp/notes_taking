@@ -18,7 +18,7 @@ import NotesFooter from "@/components/NotesFooter.vue";
     </nav>
   </NotesHeader>
 
-  <main class="h-full flex items-center justify-center px-4 py-12">
+  <main class="h-full flex items-center justify-center px-4 py-12 bg-gray-300/20 ">
     <div
       class="flex flex-col gap-8 w-full max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-3xl"
     >
@@ -29,10 +29,10 @@ import NotesFooter from "@/components/NotesFooter.vue";
         </p>
       </div>
 
-      <LoginCard />
+      <LoginCard class="shadow-lg"/>
       <p class="text-center text-gray-500">
         Don't have an account?
-        <a href="#" class="font-semibold text-blue-700">Sign up instead</a>
+        <RouterLink to="/register" class="font-semibold text-blue-700">Sign up instead</RouterLink>
       </p>
     </div>
   </main>

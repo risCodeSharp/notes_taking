@@ -1,6 +1,6 @@
 <template>
-  <aside class="hidden md:flex flex-col border-r border-gray-200 bg-gray-50 h-screen p-4">
-    <SidebarNav />
+  <aside class="flex flex-col h-full w-full border-r border-gray-200 bg-gray-50 overflow-hidden">
+    <SidebarNav class="flex-1 min-h-0 overflow-y-auto" />
   </aside>
 </template>
 

@@ -101,7 +101,7 @@
 import { ref, nextTick, watch } from 'vue'
 
 const props = defineProps<{ title: string }>()
-const emit = defineEmits(['rename', 'delete'])
+const emit = defineEmits(['rename', 'delete', 'toggle'])
 
 const isOpen = ref(true)
 const isEditing = ref(false)
@@ -115,9 +115,10 @@ watch(() => props.title, (newVal) => {
   currentTitle.value = newVal
 })
 
-const toggle = () => { 
+const toggle = () => {
   if (isEditing.value) return
-  isOpen.value = !isOpen.value 
+  isOpen.value = !isOpen.value
+  emit('toggle')
 }
 
 function startEditing() {

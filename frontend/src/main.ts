@@ -30,6 +30,8 @@ import SplitterPanel from 'primevue/splitterpanel';
 import "@/assets/main.css"; // Tailwind base imported
 import Button  from "primevue/button";
 import Avatar from "primevue/avatar";
+import {createPinia} from 'pinia';
+
 const app = createApp(App);
 
 // PrimeVue config with cssLayer
@@ -68,6 +70,6 @@ app.component('SplitterPanel', SplitterPanel);
 app.component("Editor", Editor);
 
 app.component("TabView", TabView);
-
+app.use(createPinia());
 app.use(router);
 app.mount("#app");

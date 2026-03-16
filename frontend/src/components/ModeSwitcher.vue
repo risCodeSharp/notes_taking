@@ -1,32 +1,33 @@
 <script lang="ts" setup>
-import type { Mode } from "@/types";
-import {
-  EyeIcon,
-  PencilIcon,
-  BookmarkSquareIcon,
-} from "@heroicons/vue/24/outline";
+import type { EditorMode} from "@/types";
+import { EyeIcon, PencilIcon, BookmarkSquareIcon } from "@heroicons/vue/24/outline";
 
-defineProps<{ currentMode: Mode }>();
-const emit = defineEmits<{
-  (e: "updateMode", mode: Mode): void;
+defineProps<{
+  currentMode: EditorMode
+  isSaving?:   boolean   // shows spinner on Save button while API call is in flight
 }>();
 
-const buttons: { label: Mode; icon: any }[] = [
-  { label: "Edit", icon: PencilIcon },
-  { label: "Preview", icon: EyeIcon },
-  { label: "Split", icon: null }, // Uses the pi-icon 
+const emit = defineEmits<{
+  (e: "update-mode", mode: EditorMode): void
+  (e: "save"):                   void
+}>();
+
+const buttons: { label: EditorMode; icon: any }[] = [
+  { label: "edit",    icon: PencilIcon },
+  { label: "preview", icon: EyeIcon    },
+  { label: "split",   icon: null       },
 ];
 </script>
-<!-- TODO: REMOVE THIS WITH THE PRIMEVUE: SelectButton for better ui/ui experierce-->
+
 <template>
-  <div class="flex items-center justify-between b bg-white px-4 py-2">
-    
-    <div class="flex items-center bg-gray-100 p-1 px-1.5 rounded-xl ">
+  <div class="flex items-center justify-between bg-white px-4 py-2">
+
+    <div class="flex items-center bg-gray-100 p-1 px-1.5 rounded-xl">
       <button
         v-for="btn in buttons"
         :key="btn.label"
         type="button"
-        @click="emit('updateMode', btn.label)"
+        @click="emit('update-mode', btn.label)"
         :class="[
           'flex items-center gap-2 px-4 py-1.5 text-sm font-medium rounded-lg transition-all duration-200',
           currentMode === btn.label
@@ -36,17 +37,21 @@ const buttons: { label: Mode; icon: any }[] = [
       >
         <component v-if="btn.icon" :is="btn.icon" class="w-4 h-4" />
         <i v-else class="pi pi-objects-column text-sm"></i>
-        
         {{ btn.label }}
       </button>
     </div>
 
+    <!-- Save button — spinner while saving -->
     <button
       type="button"
-      class="group flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-2"
+      :disabled="isSaving"
+      @click="emit('save')"
+      class="group flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed"
     >
-      Save
-      <BookmarkSquareIcon class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
+      <span>{{ isSaving ? 'Saving…' : 'Save' }}</span>
+      <i v-if="isSaving" class="pi pi-spin pi-spinner w-4 h-4"></i>
+      <BookmarkSquareIcon v-else class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
     </button>
+
   </div>
 </template>

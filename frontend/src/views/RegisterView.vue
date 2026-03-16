@@ -4,6 +4,7 @@ import NotesHeader from "@/components/NotesHeader.vue";
 import NotesFooter from "@/components/NotesFooter.vue";
 
 import { RouterLink } from "vue-router";
+
 </script>
 <template>
   <NotesHeader>
@@ -19,21 +20,21 @@ import { RouterLink } from "vue-router";
     </nav>
   </NotesHeader>
 
-  <main class="h-full flex items-center justify-center px-4 py-12">
+  <main class="h-full flex items-center justify-center px-4 py-12 bg-gray-300/20 ">
     <div
-      class="flex flex-col gap-8 w-full max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-3xl"
+      class="flex flex-col gap-9 w-full max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-3xl"
     >
-      <div class="text-center">
+      <div class="text-center ">
         <h1 class="font-bold text-4xl mb-2 text-gray-900">
           Create your account
         </h1>
         <p class="font-normal text-gray-500">Join writers and thinkers</p>
       </div>
 
-      <CreateCard />
-      <p class="text-center text-gray-500">
+      <CreateCard class="shadow-lg" />
+      <p class="text-center text-gray-500 ">
         Already have an account?
-        <a href="#" class="font-semibold text-blue-700">Sign in instead</a>
+        <RouterLink to="/" class="font-semibold text-blue-700">Sign in instead</RouterLink>
       </p>
     </div>
   </main>
