@@ -20,9 +20,9 @@ const modelMarkdown = computed({
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col mr-2 h-full">
 
-    <h2 class="mb-6 text-xl font-semibold text-gray-800">
+    <h2 class="mb-5 px-7 text-3xl pt-3 font-semibold text-gray-600 shrink-0">
       {{ noteName }}
     </h2>
 
@@ -32,18 +32,19 @@ const modelMarkdown = computed({
       v-model="modelMarkdown"
       :preview="false"
       language="en-US"
-      class="min-h-100"
+      class="flex-1 min-h-0 mx-3  rounded-2xl mb-6 h-full"
+      :style="{ height: '100%' }"
     />
 
     <!-- Preview Mode -->
     <div
       v-else-if="currentMode === 'preview'"
-      class="rounded-lg bg-white max-h-100 overflow-y-auto py-2"
+      class="preview-wrapper flex-1 min-h-0 mb-6 overflow-y-auto rounded-lg py-2 px-4"
     >
       <MdPreview
         :modelValue="modelMarkdown"
         language="en-US"
-        class="prose max-w-none"
+        class="prose max-w-none px-5 rounded-xl"
       />
     </div>
 
@@ -52,8 +53,30 @@ const modelMarkdown = computed({
       v-else
       v-model="modelMarkdown"
       language="en-US"
-      class="min-h-100"
+      class="flex-1 min-h-0 mx-3  rounded-2xl mb-6 h-full"
+      :style="{ height: '100%' }"
     />
 
   </div>
 </template>
+
+<style scoped>
+.preview-wrapper :deep(.md-editor-preview-wrapper) {
+  --md-bk-color: #f3f4f6 !important;
+  --md-color: #1f2937;
+  --md-border-color: #e5e7eb;
+  --md-code-bk-color: #e5e7eb;
+  --md-code-color: #374151;
+  background-color: #f3f4f6 !important;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.preview-wrapper :deep(.md-editor-preview) {
+  background-color: #f3f4f6 !important;
+}
+
+.preview-wrapper :deep(.md-editor) {
+  background-color: #f3f4f6 !important;
+}
+</style>

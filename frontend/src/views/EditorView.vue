@@ -124,8 +124,8 @@ function onKeydown(e: KeyboardEvent) {
       </SplitterPanel>
 
       <!-- Editor Panel -->
-      <SplitterPanel :size="82" :minSize="50" class="overflow-auto bg-gray-100">
-        <main class="h-full">
+      <SplitterPanel :size="82" :minSize="50" class="overflow-hidden bg-gray-100">
+        <main class="h-full flex flex-col">
 
           <!-- Empty state — no tabs open -->
           <div
@@ -137,10 +137,10 @@ function onKeydown(e: KeyboardEvent) {
           </div>
 
           <!-- Tabs -->
-          <div v-else class="ml-2 mx-auto shadow-xl rounded-lg">
+          <div v-else class="ml-2 mb-2 mx-auto w-full shadow-lg rounded-lg h-full flex flex-col">
 
-            <!-- Tab Headers (plain div, no PrimeVue Tabs wrapper needed) -->
-            <div class="flex border-b bg-gray-50 border-gray-300 overflow-x-auto pt-2">
+            <!-- Tab Headers -->
+            <div class="flex border-b bg-gray-50 border-gray-300 overflow-x-auto pt-2 shrink-0">
               <TabButton
                 v-for="(tab, index) in tabs"
                 :key="tab.noteId"
@@ -155,14 +155,15 @@ function onKeydown(e: KeyboardEvent) {
 
             <!-- Mode switcher + Save -->
             <ModeSwitcher
+              class="shrink-0"
               :current-mode="currentMode"
               :is-saving="loading.saving"
               @update-mode="(mode: EditorMode) => currentMode = mode"
               @save="handleSave"
             />
 
-            <!-- Active note content — renders immediately on open, no TabPanel gating -->
-            <div class="p-5 border border-t-0 border-gray-300 rounded-b-md bg-white">
+            <!-- Active note content -->
+            <div class="px-5 border border-t-0 border-gray-300 rounded-b-md bg-white flex-1 min-h-0 overflow-auto">
               <div v-if="loading.note" class="flex items-center justify-center py-12">
                 <i class="pi pi-spin pi-spinner text-2xl text-blue-400"></i>
               </div>
