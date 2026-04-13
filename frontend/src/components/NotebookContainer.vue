@@ -95,7 +95,6 @@
 <script lang="ts" setup>
 import { BookType, ChevronDown } from '@lucide/vue';
 import { ref, nextTick, watch } from 'vue'
-import { d } from 'vue-router/dist/index-DFCq6eJK.js';
 
 const props = defineProps<{ title: string }>()
 const emit = defineEmits(['rename', 'delete', 'toggle'])
