@@ -5,7 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AccountSettingsView from '@/views/accountSettingsView.vue'
 
 const router = createRouter({
-  history: createWebHistory('/notes_taking/'),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
