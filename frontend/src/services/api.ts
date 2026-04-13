@@ -22,12 +22,13 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
+
       if (!window.location.pathname.includes('/login')) {
-        window.location.href = '/login'
+        window.location.href = `${import.meta.env.BASE_URL}login`
       }
     }
     return Promise.reject(error)
   }
 )
 
-export default api
+export default api;
