@@ -4,7 +4,6 @@ on:
   push:
     branches: ["main"]
 
-# Add this to prevent deployment conflicts
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -14,6 +13,10 @@ permissions:
   pages: write
   id-token: write
 
+# Opt-in to Node.js 24 globally for the workflow
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-deploy:
     environment:
@@ -22,12 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Note: Checkout v4 is usually fine, but check for v5 if warnings persist
 
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24 # Use Node 24 for your build process
           cache: 'npm'
           cache-dependency-path: './frontend/package-lock.json'
 
@@ -42,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./frontend/dist 
+          path: './frontend/dist' 
 
       - name: Deploy to GitHub Pages
         id: deployment
