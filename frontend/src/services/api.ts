@@ -1,4 +1,3 @@
-// src/services/api.ts
 import axios from 'axios'
 import router from '@/router'
 
@@ -8,7 +7,6 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 })
 
-// ── Attach token to every protected request ───────────────────
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
 
@@ -19,18 +17,15 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// ── Global response error handling ────────────────────────────
 api.interceptors.response.use(
   (res) => res,
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
 
-      // Prevent redirect loop
       const current = window.location.hash
 
       if (current !== '#/login') {
-        // ✅ GitHub Pages safe redirect
         window.location.hash = '#/login'
       }
     }
