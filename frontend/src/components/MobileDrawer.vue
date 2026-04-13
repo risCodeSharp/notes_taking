@@ -12,7 +12,7 @@ const modelVisible = computed({
 </script>
 
 <template>
-  <Drawer v-model:visible="modelVisible" class="md:hidden w-68 p-3" position="left">
+  <Drawer v-model:visible="modelVisible" class="md:hidden w-60" position="left">
     <template #header>
       <!-- intentionally empty — header is inside SidebarNav -->
     </template>

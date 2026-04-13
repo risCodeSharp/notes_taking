@@ -17,6 +17,8 @@ const modelMarkdown = computed({
   get: () => props.markdown,
   set: (val: string) => emit("update:markdown", val),
 });
+
+
 </script>
 
 <template>
@@ -37,17 +39,16 @@ const modelMarkdown = computed({
     />
 
     <!-- Preview Mode -->
-    <div
-      v-else-if="currentMode === 'preview'"
-      class="preview-wrapper flex-1 min-h-0 mb-6 overflow-y-auto rounded-lg py-2 px-4"
-    >
-      <MdPreview
-        :modelValue="modelMarkdown"
-        language="en-US"
-        class="prose max-w-none px-5 rounded-xl"
-      />
-    </div>
-
+ <div
+  v-else-if="currentMode === 'preview'"
+  class="preview-wrapper flex-1 min-h-0 mb-6 overflow-y-auto rounded-lg"
+>
+  <MdPreview
+    :modelValue="modelMarkdown"
+    language="en-US"
+    class="prose prose-slate dark:prose-invert max-w-none px-5 py-2 rounded-xl"
+  />
+</div>
     <!-- Split Mode -->
     <MdEditor
       v-else

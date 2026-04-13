@@ -109,16 +109,15 @@ function onKeydown(e: KeyboardEvent) {
 
     <!-- Main Layout -->
     <Splitter
-      class="flex-1 min-h-0 overflow-hidden"
+      class="flex-1 min-h-0  overflow-hidden"
       :pt="{
-        gutter: 'w-2 bg-gray-200 hover:bg-blue-400 transition-colors duration-150 cursor-col-resize',
+        gutter: 'w-1 bg-gray-200 hover:bg-blue-400 transition-colors duration-150 cursor-col-resize',
       }"
     >
       <!-- Sidebar Panel -->
       <SplitterPanel
         :size="35"
-        :minSize="12"
-        class="hidden md:flex flex-col overflow-hidden"
+        class="hidden md:flex min-w-60 max-w-90 flex-col overflow-hidden"
       >
         <DesktopSidebar />
       </SplitterPanel>
