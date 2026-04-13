@@ -1,33 +1,34 @@
 import RegisterView from '@/views/RegisterView.vue'
 import EditorView from '@/views/EditorView.vue'
 import LoginView from '@/views/LoginView.vue'
-import { createRouter, createWebHashHistory } from 'vue-router' 
-import AccountSettingsView from '@/views/accountSettingsView.vue'
+import AccountSettingsView from '@/views/AccountSettingsView.vue'
+
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
-      path: "/",
-      name: "Editor",
+      path: '/',
+      name: 'Editor',
       component: EditorView
     },
     {
-      path: "/register",
-      name: "Create Account",
+      path: '/register',
+      name: 'Register',
       component: RegisterView
     },
     {
-      path: "/login",
-      name: "Login Account",
+      path: '/login',
+      name: 'Login',
       component: LoginView
     },
     {
-      path: "/profile",
-      name: "Account Setting",
+      path: '/profile',
+      name: 'Profile',
       component: AccountSettingsView
     }
-  ],
+  ]
 })
 
 export default router

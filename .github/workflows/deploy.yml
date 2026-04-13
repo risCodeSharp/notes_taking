@@ -13,30 +13,27 @@ permissions:
   pages: write
   id-token: write
 
-# Opt-in to Node.js 24 globally for the workflow
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4 # Note: Checkout v4 is usually fine, but check for v5 if warnings persist
+        uses: actions/checkout@v4
 
-      - name: Set up Node
+      - name: Set up Node (latest)
         uses: actions/setup-node@v4
         with:
-          node-version: 24 # Use Node 24 for your build process
+          node-version: latest
           cache: 'npm'
           cache-dependency-path: './frontend/package-lock.json'
 
       - name: Install dependencies
         working-directory: ./frontend
-        run: npm install
+        run: npm ci
 
       - name: Build project
         working-directory: ./frontend
@@ -45,7 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './frontend/dist' 
+          path: './frontend/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
