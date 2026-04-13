@@ -99,7 +99,7 @@ import { ref, nextTick, watch } from 'vue'
 const props = defineProps<{ title: string }>()
 const emit = defineEmits(['rename', 'delete', 'toggle'])
 
-const isOpen = ref(true)
+const isOpen = ref(false)
 const isEditing = ref(false)
 const editingTitle = ref('')
 const currentTitle = ref(props.title)
