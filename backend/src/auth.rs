@@ -9,7 +9,7 @@ use crate::{models::auth::{AuthUser, Claims}, response::ApiResponse, routes::App
 
 // i have set token time to 2 hours
 pub fn make_token(id: &i32, email: &str, secret: &str) -> Result<String, jsonwebtoken::errors::Error> {
-    let exp: usize = (Utc::now() + Duration::hours(2)).timestamp() as usize;
+    let exp: usize = (Utc::now() + Duration::days(31)).timestamp() as usize;
     let claims = Claims {
         sub: id.clone(),
         email: email.to_string(),
