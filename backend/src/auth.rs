@@ -7,7 +7,7 @@ use chrono::{Duration, Utc};
 use jsonwebtoken::{DecodingKey, EncodingKey, Header, Validation, decode, encode, errors::ErrorKind};
 use crate::{models::auth::{AuthUser, Claims}, response::ApiResponse, routes::AppState};
 
-// i have set token time to 2 hours
+// Auth token is vaild uptil 31 days 
 pub fn make_token(id: &i32, email: &str, secret: &str) -> Result<String, jsonwebtoken::errors::Error> {
     let exp: usize = (Utc::now() + Duration::days(31)).timestamp() as usize;
     let claims = Claims {
