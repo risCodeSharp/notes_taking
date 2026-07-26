@@ -10,3 +10,4 @@
 Users -> name, email, password_hash
 notes -> note
 note -> context, visilibity, time_last_modification, last_editor_id
+
