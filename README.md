@@ -1,5 +1,5 @@
 # 🚀 Fullstack App (Vue + Rust + Postgres)
-
+ss
 This repository contains a fullstack application with a modern frontend and a high-performance backend.
 
 ## 🧩 Tech Stack
